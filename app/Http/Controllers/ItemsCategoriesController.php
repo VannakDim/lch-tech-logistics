@@ -27,6 +27,7 @@ class ItemsCategoriesController extends Controller
         ]);
 
         if ($request->hasFile('photo')) {
+            \Illuminate\Support\Facades\Storage::disk('public')->makeDirectory('categories');
             $data['photo'] = $request->file('photo')->store('categories', 'public');
         }
 
@@ -38,7 +39,8 @@ class ItemsCategoriesController extends Controller
     public function show($id)
     {
         $category = ItemsCategories::findOrFail($id);
-        return view('items_categories.show', compact('category'));
+        return view('items.categories.show', compact('category'));
+        // return $category;
     }
 
     public function edit($id)
@@ -53,21 +55,21 @@ class ItemsCategoriesController extends Controller
 
         $data = $request->validate([
             'category_name' => 'required|string|max:255',
-            'photo' => 'nullable|image|max:5120',
+            'photo' => 'nullable|max:5120',
             'description' => 'nullable|string',
         ]);
-
         if ($request->hasFile('photo')) {
             // remove old photo
             if ($category->photo) {
                 \Illuminate\Support\Facades\Storage::disk('public')->delete($category->photo);
             }
-            $data['photo'] = $request->file('photo')->store('categories', 'public');
+            $data['photo'] = $request->file('photo')->store('images', 'public');
         }
+        
 
         $category->update($data);
 
-        return redirect()->route('items-categories.index')->with('success', 'Category updated.');
+        return redirect()->route('dashboard');
     }
 
     public function destroy($id)
@@ -80,6 +82,6 @@ class ItemsCategoriesController extends Controller
 
         $category->delete();
 
-        return redirect()->route('items-categories.index')->with('success', 'Category deleted.');
+        return redirect()->route('items.categories.index')->with('success', 'Category deleted.');
     }
 }

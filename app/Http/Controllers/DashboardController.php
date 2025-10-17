@@ -12,6 +12,6 @@ class DashboardController extends Controller
         $categories = ItemsCategories::all();
 
         return view('dashboard', compact('categories'));
-        // return $categories;
+        
     }
 }

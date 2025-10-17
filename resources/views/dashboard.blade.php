@@ -19,8 +19,7 @@
                 @if(!empty($categories) && $categories->count())
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         @foreach($categories as $category)
-                            {{-- {{ $category->category_name }} --}}
-                            <a href="{{ route('categories.show', $category->id ?? $category) }}" class="block group bg-gray-50 dark:bg-gray-900 rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+                            <a href="{{ route('categories.show', $category) }}" class="block group bg-gray-50 dark:bg-gray-900 rounded-lg overflow-hidden shadow hover:shadow-lg transition">
                                 <div class="w-full h-48 bg-gray-200 dark:bg-gray-700 ">
                                     <img
                                         src="{{ $category->photo ?? (isset($category->photo) ? Storage::url($category->photo) : asset('storage/images/placeholder.jpg')) }}"
