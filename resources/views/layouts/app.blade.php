@@ -7,7 +7,7 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <link rel="shortcut icon" href="{{ asset('storage/icon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('storage/icon.png') }}">
         <meta name="theme-color" content="#ffffff">
 
         <!-- Fonts -->
